@@ -1,0 +1,44 @@
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: eureka7001.com #eureka服务端的实例名称
+  client:
+    # 项目本身是eureka注册中心，无需注册自身
+    register-with-eureka: false
+#    false表示自己端就是注册中心,我的职责就是维护服务实例,并不需要检索服务
+    fetch-registry: false
+    service-url:
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+
+      # 单机
+       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+#    客户端间隔多久去拉取服务注册信息，默认30秒
+#    registry-fetch-interval-seconds:
+
+
+      # 集群的eureka相互注册
+#      defaultZone: http://eureka7002.com:7002/eureka
+
+
+  server:
+    peer-node-read-timeout-ms: 2000
+#    自我保护模式默认是开启的。这里关闭自我保护模式，保证不可用服务被及时删除。
+    enable-self-preservation: false
+
+#    eureka清理无效节点的间隔，默认是60000毫秒，时间不写大一点，不停的evict
+    eviction-interval-timer-in-ms: 1000000
+
+
+
+spring:
+  freemarker:
+    prefer-file-system-access: false
+  application:
+    name: eureka-server-7001
+#  cloud:
+#    loadbalancer:
+#      ribbon:
+#        enabled: false

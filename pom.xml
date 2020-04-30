@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.asule.springcloud</groupId>
+  <artifactId>springcloud</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>cloud-provider-payment8001</module>
+      <module>cloud-consumer-order80</module>
+      <module>cloud-api-base</module>
+    <module>cloud-eureka-server7001</module>
+    <module>cloud-eureka-server7002</module>
+    <module>cloud-provider-payment8002</module>
+      <module>cloud-provider-consulpayment8006</module>
+    <module>cloud-consumer-consul-order80</module>
+      <module>cloud-consumer-openfeign-order80</module>
+      <module>cloud-provider-hystrix-payment8001</module>
+      <!--<module>cloud-eurekas-server7001</module>-->
+  </modules>
+  <packaging>pom</packaging>
+
+  <name>Maven</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://maven.apache.org/</url>
+  <inceptionYear>2001</inceptionYear>
+
+
+  <!--统一管理jar包版本-->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>12</maven.compiler.source>
+    <maven.compiler.target>12</maven.compiler.target>
+    <junit.version>4.12</junit.version>
+    <lombok.version>1.18.10</lombok.version>
+    <log4j.version>1.2.17</log4j.version>
+    <mysql.version>8.0.18</mysql.version>
+    <druid.version>1.1.16</druid.version>
+    <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
+  </properties>
+
+  <!--
+    scope为import的作用是将目标POM中的dependencyManagement配置导入并合并到当前POM的dependencyManagement元素中。
+    仅在dependencyManagement中有效。
+  -->
+  <dependencyManagement>
+      <dependencies>
+        <!--
+          注意事项：
+            类型是pom，只是聚合了依赖的坐标。若要实际引用该依赖，需要子节点引入该POM中依赖。
+            父节点中非jar类型的type节点不会继承，子节点中需手动添加type。
+        -->
+        <!--spring boot 2.2.2-->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-dependencies</artifactId>
+          <version>2.2.2.RELEASE</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+
+        <!--spring cloud Hoxton.SR1-->
+        <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-dependencies</artifactId>
+          <version>Hoxton.SR1</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>com.alibaba.cloud</groupId>
+          <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+          <version>2.1.0.RELEASE</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+
+        <!--mysql-->
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>${mysql.version}</version>
+          <scope>runtime</scope>
+        </dependency>
+
+        <!-- druid-->
+        <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>druid</artifactId>
+          <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
+          <groupId>org.mybatis.spring.boot</groupId>
+          <artifactId>mybatis-spring-boot-starter</artifactId>
+          <version>${mybatis.spring.boot.version}</version>
+        </dependency>
+
+        <!--junit-->
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>${junit.version}</version>
+        </dependency>
+
+
+
+        <!--log4j-->
+        <!--<dependency>-->
+          <!--<groupId>log4j</groupId>-->
+          <!--<artifactId>log4j</artifactId>-->
+          <!--<version>${log4j.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+          <!--<groupId>org.slf4j</groupId>-->
+          <!--<artifactId>slf4j-api</artifactId>-->
+          <!--<version>1.7.30</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+          <!--<groupId>ch.qos.logback</groupId>-->
+          <!--<artifactId>logback-core</artifactId>-->
+          <!--<version>1.2.3</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <!--<dependency>-->
+          <!--<groupId>ch.qos.logback</groupId>-->
+          <!--<artifactId>logback-classic</artifactId>-->
+          <!--<version>1.2.3</version>-->
+          <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+
+
+
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+          <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.2.3</version>
+        </dependency>
+
+
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.8</version>
+          <scope>provided</scope>
+        </dependency>
+
+      </dependencies>
+  </dependencyManagement>
+
+
+  <!--<option name="configurationTypes">-->
+    <!--<set>-->
+      <!--<option value="SpringBootApplicationConfigurationType"/>-->
+    <!--</set>-->
+  <!--</option>-->
+
+
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <locales>en,fr</locales>
+        </configuration>
+      </plugin>
+
+      <!--devtools-->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <!--<version>2.2.1.RELEASE</version>-->
+        <configuration>
+          <!--<includeSystemScope>true</includeSystemScope>-->
+          <fork>true</fork>
+          <addResources>true</addResources>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
